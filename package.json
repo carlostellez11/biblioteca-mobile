@@ -1,12 +1,15 @@
 {
   "name": "biblioteca-mobile",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "expo-router/entry",
   "dependencies": {
     "@react-navigation/bottom-tabs": "^7.22.0",
     "@react-navigation/native": "^7.5.2",
     "@react-navigation/native-stack": "^7.21.1",
     "expo": "~58.0.26",
+    "expo-constants": "~58.0.16",
+    "expo-linking": "~58.0.17",
+    "expo-router": "~58.0.32",
     "expo-secure-store": "~58.0.3",
     "expo-status-bar": "~58.0.5",
     "react": "19.3.0",
