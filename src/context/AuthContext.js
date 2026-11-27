@@ -1,11 +1,18 @@
 
-import { createContext, useContext, useEffect, useState } from 'react';
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
 
 import {
   login as loginService,
   logout as logoutService,
   getStoredUser,
 } from '../services/authService';
+
+import { setUnauthorizedHandler } from '../services/api';
 
 const AuthContext = createContext(null);
 
@@ -14,6 +21,13 @@ export function AuthProvider({ children }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    const removeUnauthorizedHandler = setUnauthorizedHandler(
+      async () => {
+        await logoutService();
+        setUser(null);
+      }
+    );
+
     async function cargarSesion() {
       try {
         const storedUser = await getStoredUser();
@@ -26,6 +40,8 @@ export function AuthProvider({ children }) {
     }
 
     cargarSesion();
+
+    return removeUnauthorizedHandler;
   }, []);
 
   async function login(email, password) {
